@@ -5,11 +5,16 @@ export class MarqueeWizardPage {
     wizard = $('ux-marquee-wizard');
     stepHeaders = $$('.marquee-wizard-step');
     stepContents = $$('ux-marquee-wizard-step');
-    gutter = element(by.tagName('split-gutter'));
+    gutter = $('.as-split-gutter');
     resizeableButton = element(by.id('resizeable'));
     footerTemplateButton = element(by.id('footerTemplate'));
+    step4InvalidButton = element(by.id('step4Invalid'));
+    step1InvalidButton = element(by.id('step1Invalid'));
+    step2InvalidButton = element(by.id('step2Invalid'));
+    disableNextWhenInvalidStep1Button = element(by.id('disableNextWhenInvalidStep1'));
+    disableNextWhenInvalidWizardButton = element(by.id('disableNextWhenInvalidWizard'));
     resetButton = element(by.id('reset'));
-    input = $('input');
+    input = $('ux-number-picker input');
     emittedWidth = element(by.id('sidePanelWidthChange'));
 
     buttons = $$('button');
@@ -88,7 +93,7 @@ export class MarqueeWizardPage {
     }
 
     async mouseMoveLeft(): Promise<void> {
-        return await browser.actions().dragAndDrop(this.gutter, { x: -10, y: 0 }).perform();
+        await browser.actions().dragAndDrop(this.gutter, { x: -10, y: 0 }).perform();
     }
 
     async mouseMoveRight(): Promise<void> {
