@@ -3,7 +3,6 @@ import { BehaviorSubject, combineLatest, Subject } from 'rxjs';
 import { pairwise, takeUntil } from 'rxjs/operators';
 import { ColorPickerColor } from './color-picker-color';
 import { ColorPickerButtonSize, ColorPickerButtonStyle, ColorPickerInputColors, ColorPickerInputMode } from './color-picker.type';
-import { Validators } from '@angular/forms';
 
 // Values corresponding to stylesheet
 const BUTTON_MARGIN = 8;
