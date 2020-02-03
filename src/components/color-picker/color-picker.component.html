@@ -1,8 +1,8 @@
 <div class="ux-color-picker" uxTabbableList direction="horizontal">
     <div class="ux-color-picker-swatch">
-        <div *ngFor="let row of _colors" class="ux-color-picker-swatch-row">
+        <div *ngFor="let row of colors" class="ux-color-picker-swatch-row">
 
-            <div *ngFor="let _color of row"
+            <div *ngFor="let color of row"
                 class="ux-color-picker-color"
                 [class.ux-small]="(buttonSize$ | async) === 'sm'"
                 [class.ux-large]="(buttonSize$ | async) === 'lg'"
