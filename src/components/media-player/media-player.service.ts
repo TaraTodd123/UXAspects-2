@@ -337,6 +337,14 @@ export class MediaPlayerService {
         }
     }
 
+    fullscreenChange(): void {
+        // get the document element (we need to do some browser specific checks and typescript complains)
+        const host = document as any;
+
+        // set the fullscreen state (this also emits the event)
+        this.fullscreen = host.fullscreen || host.webkitIsFullScreen || host.mozFullScreen || host.msFullscreenElement !== null && host.msFullscreenElement !== undefined;
+    }
+
     /**
      * Toggle Fullscreen State
      */

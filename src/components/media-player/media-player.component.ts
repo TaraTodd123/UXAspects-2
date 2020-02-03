@@ -18,6 +18,10 @@ import { MediaPlayerService } from './media-player.service';
         '[class.audio]': 'type === "audio"',
         '(mouseenter)': 'hovering = true',
         '(mouseleave)': 'hovering = false',
+        '(document:fullscreenchange)': 'mediaPlayerService.fullscreenChange()',
+        '(document:webkitfullscreenchange)': 'mediaPlayerService.fullscreenChange()',
+        '(document:mozfullscreenchange)': 'mediaPlayerService.fullscreenChange()',
+        '(document:MSFullscreenChange)': 'mediaPlayerService.fullscreenChange()'
     }
 })
 export class MediaPlayerComponent implements AfterViewInit, OnDestroy {

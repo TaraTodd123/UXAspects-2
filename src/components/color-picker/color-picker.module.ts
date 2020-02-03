@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { AccessibilityModule } from '../../directives/accessibility/index';
 import { IconModule } from '../icon/index';
 import { NumberPickerModule } from '../number-picker/index';
@@ -15,7 +15,6 @@ import { ColorPickerComponent } from './color-picker.component';
         NumberPickerModule,
         TooltipModule,
         IconModule,
-        ReactiveFormsModule
     ],
     exports: [
         ColorPickerComponent

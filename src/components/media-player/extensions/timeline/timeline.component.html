@@ -6,9 +6,9 @@
      role="slider"
      [attr.aria-label]="mediaPlayerService.seekAriaLabel"
      aria-valuemin="0"
-     [attr.aria-valuemax]="duration$ | async | number: '0.0-0'"
+     [attr.aria-valuemax]="mediaPlayerService.duration | number: '0.0-0'"
      [attr.aria-valuenow]="mediaPlayerService.currentTime | number: '0.0-0'"
-     attr.aria-valuetext="{{ mediaPlayerService.currentTime | duration }} of {{ duration$ | async | duration }}"
+     attr.aria-valuetext="{{ mediaPlayerService.currentTime | duration }} of {{ mediaPlayerService.duration | duration }}"
      (keydown.ArrowLeft)="skip(-5)"
      (keydown.ArrowRight)="skip(5)"
      (mouseenter)="scrub.visible = true; tooltip.show()"
@@ -41,10 +41,10 @@
          [showTriggers]="[]"
          [hideTriggers]="[]"
          [tooltipDelay]="100"
-         [tooltipDisabled]="(duration$ | async) === 0"></div>
+         [tooltipDisabled]="mediaPlayerService.duration === 0"></div>
 </div>
 
-<p class="duration-time">{{ duration$ | async | duration }}</p>
+<p class="duration-time">{{ mediaPlayerService.duration | duration }}</p>
 
 <ng-template #popTemplate>
     <span>{{ scrub.time | duration }}</span>

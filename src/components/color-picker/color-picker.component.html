@@ -2,21 +2,21 @@
     <div class="ux-color-picker-swatch">
         <div *ngFor="let row of _colors" class="ux-color-picker-swatch-row">
 
-            <div *ngFor="let color of row"
+            <div *ngFor="let _color of row"
                 class="ux-color-picker-color"
-                [class.ux-small]="buttonSize === 'sm'"
-                [class.ux-large]="buttonSize=== 'lg'"
+                [class.ux-small]="(buttonSize$ | async) === 'sm'"
+                [class.ux-large]="(buttonSize$ | async) === 'lg'"
                 [class.ux-circle]="buttonStyle === 'circle'"
-                [class.ux-selected]="color === selected">
+                [class.ux-selected]="color === (selected$ | async)">
 
                 <button type="button"
                     uxFocusIndicator
                     [attr.aria-label]="colorAriaLabel(color)"
-                    aria-selected="color === selected"
+                    aria-selected="color === (selected$ | async"
                     class="btn btn-icon"
                     [uxColorContrast]="color.hex"
                     [style.background-color]="color.rgba"
-                    (click)="selectedChange.emit(color)"
+                    (click)="selected$.next(color)"
                     uxTabbableListItem
                     [uxTooltip]="color.name"
                     [tooltipDisabled]="!showTooltips">
@@ -32,7 +32,7 @@
         <div class="ux-color-picker-input-header">
 
             <div class="ux-color-picker-preview"
-                [style.background-color]="selected?.rgba"
+                [style.background-color]="(selected$ | async).rgba"
                 [class.ux-circle]="buttonStyle === 'circle'">
             </div>
 
@@ -42,20 +42,23 @@
             <button type="button"
                 [attr.aria-label]="switchModeAriaLabel(inputMode)"
                 class="btn btn-link btn-icon button-secondary ux-color-picker-input-toggle"
-                (click)="toggleInputMode(); $event.stopPropagation()">
+                (click)="toggleColorEntryType(); $event.stopPropagation()">
                 <ux-icon name="chevron-right"></ux-icon>
             </button>
         </div>
 
         <div class="ux-color-picker-input"
-            [class.has-error]="_input.errors"
-            [class.has-feedback]="_input.errors">
+            [class.has-error]="inputField.errors"
+            [class.has-feedback]="inputField.errors">
 
             <input type="text"
                 attr.id="{{id}}-input-field"
                 [attr.aria-description]="inputAriaLabel(inputMode)"
                 class="form-control"
-                [formControl]="_input"
+                #inputField="ngModel"
+                [ngModel]="(selected$ | async)[inputMode]"
+                (ngModelChange)="updateColorValue($event, inputMode)"
+                [pattern]="inputPatterns[inputMode].source"
                 (keyup.enter)="inputSubmit.emit()">
 
                 <ux-icon class="form-control-feedback" name="alert"></ux-icon>

@@ -1,7 +1,6 @@
 import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { fromEvent, Subject } from 'rxjs';
 import { switchMap, takeUntil } from 'rxjs/operators';
-import { tick } from '../../../../common/index';
 import { MediaPlayerService } from '../../media-player.service';
 
 
@@ -23,7 +22,6 @@ export class MediaPlayerTimelineExtensionComponent implements OnInit, AfterViewI
     buffered: MediaPlayerBuffered[] = [];
     mouseDown: boolean = false;
     scrub = { visible: false, position: 0, time: 0 };
-    duration$ = this.mediaPlayerService.durationChangeEvent.pipe(tick());
 
     private _onDestroy = new Subject<void>();
 
@@ -32,7 +30,9 @@ export class MediaPlayerTimelineExtensionComponent implements OnInit, AfterViewI
     ngOnInit(): void {
 
         // watch for changes to the current time
-        this.mediaPlayerService.fullscreenEvent.pipe(takeUntil(this._onDestroy)).subscribe(() => this.scrub.position = 0);
+        this.mediaPlayerService.fullscreenEvent.pipe(takeUntil(this._onDestroy)).subscribe(fullscreen => {
+            this.scrub.position = 0;
+        });
 
         this.mediaPlayerService.timeUpdateEvent.pipe(takeUntil(this._onDestroy)).subscribe(current => {
             this.current = current;
