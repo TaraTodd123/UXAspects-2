@@ -129,6 +129,7 @@ export class ColorPickerComponent implements OnInit, OnDestroy {
     private _onDestroy = new Subject();
 
     ngOnInit(): void {
+
         // Skip emitting the initial selectedChange
         this.selected$.pipe(pairwise(), takeUntil(this._onDestroy)).subscribe(([prev, curr]) => {
             if (prev) {

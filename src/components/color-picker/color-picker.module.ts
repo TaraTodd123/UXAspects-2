@@ -14,7 +14,7 @@ import { ColorPickerComponent } from './color-picker.component';
         FormsModule,
         NumberPickerModule,
         TooltipModule,
-        IconModule,
+        IconModule
     ],
     exports: [
         ColorPickerComponent
